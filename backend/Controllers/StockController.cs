@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using backend.Data;
+using backend.Dtos.Stock;
 using backend.Mappers;
+using backend.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
@@ -34,6 +36,15 @@ namespace backend.Controllers
                 return NotFound();
 
             return Ok(stock.ToStockDto());
+        }
+
+        [HttpPost()]
+        public IActionResult Create([FromBody] CreateStockRequestDto stockDto)
+        {
+            var stockModel = stockDto.ToStockFromCreateDto();
+            _context.Add(stockModel);
+            _context.SaveChanges();
+            return CreatedAtAction(nameof(GetStockById), new { id = stockModel.Id }, stockModel.ToStockDto());
         }
     }
 }
