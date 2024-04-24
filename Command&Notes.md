@@ -22,3 +22,5 @@
 
 - Controller facilitate get and set information endpoints
   -- model biding extract and turner value
+
+- DTOs(data transfer object) are use for response and request data
