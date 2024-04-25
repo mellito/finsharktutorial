@@ -26,4 +26,9 @@
 - DTOs(data transfer object) are use for response and request data
 
 - Async/await -> allow to execute piece of code multiple time to convert a function to async function
-  add async and Task(return type)
+  add async, Task(return type), add await to make async call
+
+- Repository Patter "Code to interface (code to an abstraction)" replace code repetitive in one that can be more maintainable
+  --interfaces allows to abstract our code and injected in other places
+  --when a interface is used need to create a services for that interface (example in program.cs
+  builder.Services.AddScoped<IStockRepository, StockRepository>();)
