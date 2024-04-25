@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using backend.Data;
 using backend.Interfaces;
 using backend.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Repository
@@ -24,5 +25,14 @@ namespace backend.Repository
             return await _context.Comments.ToListAsync();
         }
 
+        public async Task<Comment?> GetByIdAsync(int id)
+        {
+            var comment = await _context.Comments.FindAsync(id);
+            if (comment == null)
+            {
+                return null;
+            }
+            return comment;
+        }
     }
 }

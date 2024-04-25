@@ -1,4 +1,3 @@
-using backend.Data;
 using backend.Dtos.Stock;
 using backend.Interfaces;
 using backend.Mappers;

@@ -32,3 +32,8 @@
   --interfaces allows to abstract our code and injected in other places
   --when a interface is used need to create a services for that interface (example in program.cs
   builder.Services.AddScoped<IStockRepository, StockRepository>();)
+
+- include() -> allows us to get information from tables that have relationship
+  -- install Newtonsoft.json and mvc.nwstonsoftjson to the include work
+  -- add the service in the addcontroller builder
+  -- this for prevent looping cycles
