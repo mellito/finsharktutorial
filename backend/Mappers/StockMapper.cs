@@ -15,7 +15,7 @@ namespace backend.Mappers
             {
                 Id = stockModel.Id,
                 Symbol = stockModel.Symbol,
-                CompanyName = stockModel.Symbol,
+                CompanyName = stockModel.CompanyName,
                 Purchase = stockModel.Purchase,
                 LastDiv = stockModel.LastDiv,
                 Industry = stockModel.Industry,

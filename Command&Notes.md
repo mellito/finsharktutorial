@@ -24,3 +24,6 @@
   -- model biding extract and turner value
 
 - DTOs(data transfer object) are use for response and request data
+
+- Async/await -> allow to execute piece of code multiple time to convert a function to async function
+  add async and Task(return type)
