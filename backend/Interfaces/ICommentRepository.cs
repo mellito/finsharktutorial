@@ -1,3 +1,4 @@
+using backend.Dtos.Comment;
 using backend.Models;
 
 namespace backend.Interfaces
@@ -6,5 +7,8 @@ namespace backend.Interfaces
     {
         Task<List<Comment>> GetAllAsync();
         Task<Comment?> GetByIdAsync(int id);
+        Task<Comment> CreateAsync(Comment commentModel);
+        Task<Comment?> UpdateAsync(int id, UpdateCommentDto commentDto);
+        Task<bool> ExistComment(int id);
     }
 }
