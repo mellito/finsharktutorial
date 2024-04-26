@@ -37,3 +37,32 @@
   -- install Newtonsoft.json and mvc.nwstonsoftjson to the include work
   -- add the service in the addcontroller builder
   -- this for prevent looping cycles
+
+- datavalidation is the way to validate information coming from the frontend
+  -- validate json information
+  -- Route Constrain is when you add specific type in to the rout in the controller Ex: [HttpDelete("{id:int}")]
+  -- data validation annotation this one is when you validate information in to the class to make sure that we have the values that we want usually is done in dtos
+  -- to make sure that the validation are working need to use ModelState.IsValid is inherit from controlbase
+
+- toList trigger the database to bring bag de information
+- AsQueryable() delate the trigger to the sql database to manipulate it and used as you want
+
+- pagination help to speed of the search
+  -- skip(n) -> dont take n first elements of the array
+  -- take(n) -> take the n first elements of the array
+  -- combine make the pagination possible
+
+# AUTHENTICATION
+
+- jwt string of work that is need it to validate
+  -- header
+  -- payload
+  -- install : Microsoft.Extensions.Identity.Core, Microsoft.AspNetCore.identity.EntityFrameWorkCore,Microsoft.AspNetCore.Authentication.JwtBearer
+  -- need user model -> IdentityUser <- is the one that we can use
+  -- let dbContext know that we are using identityUser this is done be change dbcontext in the class where you set the dbcontext for IdentityDbContext<UserModel>
+  -- need to add identity in the program
+  -- add authentication services and schemes
+  -- after all the configuration create a migration for the userIdentity
+
+- registration
+  -- userManager take care of the registration of the user with createAsync(user,"password")

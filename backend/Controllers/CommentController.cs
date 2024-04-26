@@ -21,15 +21,19 @@ namespace backend.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             var comments = await _commentRepository.GetAllAsync();
             var commentDto = comments.Select(s => s.ToCommentDto());
             return Ok(commentDto);
         }
 
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             var comment = await _commentRepository.GetByIdAsync(id);
             if (comment == null)
             {
@@ -38,9 +42,11 @@ namespace backend.Controllers
             return Ok(comment.ToCommentDto());
         }
 
-        [HttpPost("{stockId}")]
+        [HttpPost("{stockId:int}")]
         public async Task<IActionResult> Create([FromRoute] int stockId, [FromBody] CreateCommentRequestDto comment)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             var existingStock = await _stockRepository.StockExist(stockId);
             if (!existingStock)
             {
@@ -51,9 +57,11 @@ namespace backend.Controllers
             return CreatedAtAction(nameof(GetById), new { id = commentModel.Id }, commentModel.ToCommentDto());
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateCommentDto comment)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             var updatedComment = await _commentRepository.UpdateAsync(id, comment);
             if (updatedComment == null)
             {
@@ -62,9 +70,11 @@ namespace backend.Controllers
             return Ok(updatedComment.ToCommentDto());
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             var deleteComment = await _commentRepository.DeleteAsync(id);
             if (deleteComment == null)
             {
