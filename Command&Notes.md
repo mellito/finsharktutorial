@@ -66,3 +66,8 @@
 
 - registration
   -- userManager take care of the registration of the user with createAsync(user,"password")
+
+- Create token
+  -- claim vs roles
+  -- roles -> get from database
+  -- claims -> tag associate with user (can be use in jwt token)
