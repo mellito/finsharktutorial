@@ -20,17 +20,12 @@ namespace backend.Services
             _config = config;
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:SignKey"]));
         }
-        public string CreateToken(AppUser user)
+        public string CreateToken(List<Claim> authClaims)
         {
-            var claims = new List<Claim>{
-            new Claim(JwtRegisteredClaimNames.Email,user.Email),
-            new Claim(JwtRegisteredClaimNames.GivenName,user.UserName)
-           };
-
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(claims),
+                Subject = new ClaimsIdentity(authClaims),
                 Expires = DateTime.Now.AddDays(1),
                 SigningCredentials = creds,
                 Issuer = _config["JWT:Issuer"],

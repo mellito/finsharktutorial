@@ -2,12 +2,14 @@ using backend.Dtos.Stock;
 using backend.Helpers;
 using backend.Interfaces;
 using backend.Mappers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
 {
     [ApiController]
     [Route("api/stock")]
+    [Authorize]
     public class StockController : ControllerBase
     {
         private readonly IStockRepository _stockRepository;
