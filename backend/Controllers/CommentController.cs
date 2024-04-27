@@ -1,7 +1,10 @@
 using backend.Dtos.Comment;
+using backend.Extensions;
 using backend.Interfaces;
 using backend.Mappers;
+using backend.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -14,10 +17,12 @@ namespace backend.Controllers
     {
         private readonly ICommentRepository _commentRepository;
         private readonly IStockRepository _stockRepository;
-        public CommentController(ICommentRepository commentRepository, IStockRepository stockRepository)
+        private readonly UserManager<AppUser> _userManager;
+        public CommentController(ICommentRepository commentRepository, IStockRepository stockRepository, UserManager<AppUser> userManager)
         {
             _commentRepository = commentRepository;
             _stockRepository = stockRepository;
+            _userManager = userManager;
         }
 
 
@@ -55,7 +60,9 @@ namespace backend.Controllers
             {
                 return BadRequest("Stock not Exist");
             }
-            var commentModel = comment.ToCommentFromCreate(stockId);
+            var userEmail = User.GetUserEmail();
+            var appUser = await _userManager.FindByEmailAsync(userEmail);
+            var commentModel = comment.ToCommentFromCreate(stockId, appUser.Id);
             await _commentRepository.CreateAsync(commentModel);
             return CreatedAtAction(nameof(GetById), new { id = commentModel.Id }, commentModel.ToCommentDto());
         }
