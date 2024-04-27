@@ -71,3 +71,11 @@
   -- claim vs roles
   -- roles -> get from database
   -- claims -> tag associate with user (can be use in jwt token)
+
+- many to many this SQL
+- to setup this need to create a middle table that hold the 2 id that have many to many relationship
+- create model
+- put the new table model in the one that have the id
+- set up the dbset and the connections in the OnModelCreating
+
+- crud data many to many
