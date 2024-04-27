@@ -1,6 +1,7 @@
 
 using backend.Data;
 using backend.Dtos.Comment;
+using backend.Helpers;
 using backend.Interfaces;
 using backend.Models;
 using Microsoft.EntityFrameworkCore;
@@ -41,9 +42,19 @@ namespace backend.Repository
             return await _context.Comments.AnyAsync(c => c.Id == id);
         }
 
-        public async Task<List<Comment>> GetAllAsync()
+        public async Task<List<Comment>> GetAllAsync(CommentQueryObject queryObject)
         {
-            return await _context.Comments.Include(c => c.AppUser).ToListAsync();
+            var comments = _context.Comments.Include(c => c.AppUser).AsQueryable();
+            if (!string.IsNullOrWhiteSpace(queryObject.Symbol))
+            {
+                comments = comments.Where(c => c.Stock.Symbol == queryObject.Symbol);
+            }
+            if (queryObject.IsDecs)
+            {
+                comments = comments.OrderByDescending(c => c.CreateOn);
+            }
+
+            return await comments.ToListAsync();
         }
 
         public async Task<Comment?> GetByIdAsync(int id)
