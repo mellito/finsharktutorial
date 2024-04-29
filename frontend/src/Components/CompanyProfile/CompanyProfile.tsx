@@ -8,6 +8,7 @@ import {
   formatLargeNonMonetaryNumber,
   formatRatio,
 } from "../../Helper/NumberFormatting";
+import StockComment from "../StockComment/StockComment";
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Props = {};
@@ -97,6 +98,7 @@ const CompanyProfile = (props: Props) => {
       {companyData ? (
         <>
           <RatioList config={tableConfig} data={companyData} />
+          <StockComment stockSymbol={ticker} />
         </>
       ) : (
         <Spinner />

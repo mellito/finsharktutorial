@@ -115,5 +115,11 @@ namespace backend.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
+        [HttpPost("validatetoken")]
+        public bool ValidateToken([FromBody] TokenValidationDTo token)
+        {
+            return _tokenService.ValidateToken(token.token);
+        }
     }
 }

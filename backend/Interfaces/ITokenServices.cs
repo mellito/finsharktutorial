@@ -10,5 +10,6 @@ namespace backend.Interfaces
     public interface ITokenServices
     {
         string CreateToken(List<Claim> authClaims);
+        bool ValidateToken(string token);
     }
 }

@@ -36,5 +36,28 @@ namespace backend.Services
 
             return tokenHandler.WriteToken(token);
         }
+
+        public bool ValidateToken(string token)
+        {
+            var tokenHandle = new JwtSecurityTokenHandler();
+            try
+            {
+                tokenHandle.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = _key,
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero
+
+                }, out SecurityToken validatedToken);
+
+                return true;
+            }
+            catch (System.Exception)
+            {
+                return false;
+            }
+        }
     }
 }
